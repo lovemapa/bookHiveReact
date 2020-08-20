@@ -7,6 +7,10 @@ import './SingleCarousel.css'
 export default class SingleCarousel extends Component {
 
 
+    state = {
+        modalClose: true,
+        location: ''
+    }
 
     clickedHandler = (id) => {
 
@@ -15,16 +19,21 @@ export default class SingleCarousel extends Component {
 
                 console.log(response);
 
-                return (<Book
-                    location={response.data.data.location}
-                />)
+                this.setState({ modalClose: false, location: response.data.data.location })
 
             }).catch(err => console.log(err))
     }
 
     render() {
+
+        let BookComponent = null
+        if (!this.state.modalClose) {
+            BookComponent = (<Book location={this.state.location} />)
+        }
+
         return (
             <Aux>
+                {BookComponent}
                 <div className="tile" onClick={() => { this.clickedHandler(this.props.bookId) }}>
                     <div className="tile__media">
                         <img className="tile__img" src={'http://localhost:8081' + this.props.image} alt="" />

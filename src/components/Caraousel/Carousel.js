@@ -20,7 +20,6 @@ export default class Carousel extends Component {
                 <SingleCarousel
                     key={book._id}
                     bookId={book._id}
-                    // clicked={() => { this.clickedHandler(book._id) }}
                     image={book.coverPhoto}
                     title={book.bookTitle}
                 />
